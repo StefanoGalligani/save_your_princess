@@ -1,0 +1,6 @@
+/Logs/
+*.csproj
+/Library/
+/UserSettings/
+/Temp/
+/Temp\_Backupscenes/
