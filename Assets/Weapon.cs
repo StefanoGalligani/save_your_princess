@@ -7,9 +7,14 @@ public class Weapon : MonoBehaviour
     public float damage = 2;
     private bool isAttacking = false;
     private Animator anim;
+    private GameObject owner;
 
     void Start() {
         anim = GetComponent<Animator>();
+    }
+
+    public void SetOwner(GameObject g) {
+        owner = g;
     }
 
     public void StartAttacking() {
@@ -25,8 +30,9 @@ public class Weapon : MonoBehaviour
     }
 
     public void OnTriggerEnter(Collider coll) {
-        if (isAttacking && coll.gameObject.GetComponent<Enemy>()) {
-            coll.gameObject.GetComponent<Enemy>().Damage(damage);
+        if (isAttacking && coll.gameObject.GetComponent<LivingCreature>() != null) {
+            if (!coll.gameObject.Equals(owner))
+                coll.gameObject.GetComponent<LivingCreature>().Damage(damage);
         }
     }
 }
