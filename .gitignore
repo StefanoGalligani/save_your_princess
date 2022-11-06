@@ -1,5 +1,6 @@
 /Logs/
 *.csproj
+*.cache
 /Library/
 /UserSettings/
 /Temp/
