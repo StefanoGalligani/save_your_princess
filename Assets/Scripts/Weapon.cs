@@ -30,7 +30,7 @@ public class Weapon : MonoBehaviour
     }
 
     public void OnTriggerEnter(Collider coll) {
-        if (isAttacking && coll.gameObject.GetComponent<LivingCreature>() != null) {
+        if (isAttacking && coll.GetComponent<LivingCreature>() != null) {
             if (!coll.gameObject.Equals(owner))
                 coll.gameObject.GetComponent<LivingCreature>().Damage(damage);
         }

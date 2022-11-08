@@ -8,26 +8,30 @@ public class Enemy : MonoBehaviour, LivingCreature
     public float distanceToAttack = 2;
     public float health = 5;
     public float attackTime = 1;
+    public float firstAttackTime = .2f;
 
     float counter = 0;
     Weapon weapon;
     Transform target;
+    Rigidbody rb;
     bool followTarget = true;
 
     void Start() {
         target = Camera.main.transform.parent;
+        rb = GetComponent<Rigidbody>();
         weapon = GetComponentInChildren<Weapon>();
         weapon.SetOwner(gameObject);
     }
 
-    void Update() {
+    void FixedUpdate() {
         if (followTarget) {
             Vector3 direction = (target.position - transform.position);
+            direction.y = 0;
             if (direction.sqrMagnitude > distanceToAttack*distanceToAttack) {
-                GetComponent<Rigidbody>().MovePosition(transform.position + direction.normalized * Time.deltaTime * speed);
-                counter = attackTime - 0.2f;
+                rb.MovePosition(rb.position + direction.normalized * Time.fixedDeltaTime * speed);
+                counter = attackTime - firstAttackTime;
             } else {
-                counter += Time.deltaTime;
+                counter += Time.fixedDeltaTime;
                 if (counter >= attackTime) {
                     counter = 0;
                     weapon.StartAttacking();
