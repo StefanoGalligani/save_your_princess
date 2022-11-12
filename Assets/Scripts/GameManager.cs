@@ -14,17 +14,59 @@ public class GameManager : MonoBehaviour
     private List<MissionInfo> missions;
     private string listPath;
     private string infoPath;
+    private string coinsPath;
+    private string inventoryPath;
+    private string equipmentPath;
+    private string buildingPowerupsPath;
 
     void Start() {
         string temp = Application.persistentDataPath;
         listPath = Path.Combine(temp, "missionsList.txt");
         infoPath = Path.Combine(temp, "missionInfo.txt");
+        coinsPath = Path.Combine(temp, "coins.txt");
+        inventoryPath = Path.Combine(temp, "inventory.txt");
+        equipmentPath = Path.Combine(temp, "equipment.txt");
+        buildingPowerupsPath = Path.Combine(temp, "building.txt");
 
         detailedInfoScroll.SetActive(false);
         missions = new List<MissionInfo>();
 
         WriteNewMissions();
         ShowMissions();
+        InitInventory();
+    }
+
+    private void InitInventory() {
+        if (!File.Exists(coinsPath)) {
+            File.Create(coinsPath).Close();
+
+            TextWriter tw = new StreamWriter(coinsPath);
+            tw.WriteLine("10");
+            tw.Close();
+        }
+        if (!File.Exists(inventoryPath)) {
+            File.Create(inventoryPath).Close();
+
+            TextWriter tw = new StreamWriter(inventoryPath);
+            string line = "Weapon_Sword\nChestplate_Leather";
+            tw.WriteLine(line);
+            tw.Close();
+        }
+        if (!File.Exists(equipmentPath)) {
+            File.Create(equipmentPath).Close();
+
+            TextWriter tw = new StreamWriter(equipmentPath);
+            string line = "Weapon_Sword\nChestplate_Leather";
+            tw.WriteLine(line);
+            tw.Close();
+        }
+        if (!File.Exists(buildingPowerupsPath)) {
+            File.Create(buildingPowerupsPath).Close();
+
+            TextWriter tw = new StreamWriter(buildingPowerupsPath);
+            tw.WriteLine("Floors:1;Assistants:1;Upgrades:0");
+            tw.Close();
+        }
     }
 
     private void ShowMissions() {
@@ -82,7 +124,6 @@ public class GameManager : MonoBehaviour
             if (m.days == 0) missions.Remove(m);
         }
 
-
         FileStream stream = File.Create(listPath);
         stream.Close();
         TextWriter tw = new StreamWriter(listPath);
@@ -91,7 +132,6 @@ public class GameManager : MonoBehaviour
         }
         tw.Close();
 
-        
         stream = File.Create(infoPath);
         stream.Close();
         tw = new StreamWriter(infoPath);
