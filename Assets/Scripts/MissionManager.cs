@@ -10,10 +10,16 @@ public class MissionManager : MonoBehaviour
     public GameObject skyContainer;
     public int diff {get; private set;}
     public string time {get; private set;}
+    private string inventoryPath;
+    private string equipmentPath;
+    private string resultPath;
 
     void Start() {
         string temp = Application.persistentDataPath;
         string sPath = Path.Combine(temp, "missionInfo.txt");
+        inventoryPath = Path.Combine(temp, "inventory.txt");
+        equipmentPath = Path.Combine(temp, "equipment.txt");
+        resultPath = Path.Combine(temp, "result.txt");
 
         bool fileExist = File.Exists(sPath);
         if (fileExist) {
@@ -27,8 +33,8 @@ public class MissionManager : MonoBehaviour
     }
 
     private void Setup(string sPath) {
-        TextReader tw = new StreamReader(sPath);
-        string[] lines = tw.ReadLine().Split(";");
+        TextReader tr = new StreamReader(sPath);
+        string[] lines = tr.ReadLine().Split(";");
 
         foreach(string l in lines) {
             string[] splits = l.Split(':');
@@ -41,7 +47,8 @@ public class MissionManager : MonoBehaviour
                 break;
             }
         }
-            
+        tr.Close();
+
         SetSunRotation();
         ActivateSpawners();
     }
@@ -73,9 +80,49 @@ public class MissionManager : MonoBehaviour
         }
     }
 
+    public void Death() {
+        TextReader trInv = new StreamReader(inventoryPath); //read inventory
+        List<string> inventory = new List<string>();
+        string line;
+        while ((line = trInv.ReadLine()) != null && line != "") {
+            inventory.Add(line);
+        }
+        trInv.Close();
+
+        TextReader trEq = new StreamReader(equipmentPath); //remove equipment from inventory
+        string[] lines = trEq.ReadLine().Split(";");
+        foreach(string l in lines) {
+            string[] splits = l.Split(':');
+            if (splits[1]!="") {
+                inventory.Remove(splits[1]);
+            }
+        }
+        trEq.Close();
+        
+        TextWriter twEq = new StreamWriter(equipmentPath); //write empty equipment
+        twEq.WriteLine("Helmet:;Chestplate:;Boots:;Weapon:;Talisman:;Ring:");
+        twEq.Close();
+        
+        TextWriter twInv = new StreamWriter(inventoryPath); //write new inventory
+        foreach(string s in inventory) {
+            twInv.WriteLine(s);
+        }
+        twInv.Close();
+        
+        TextWriter twRes = new StreamWriter(resultPath); //write new inventory
+        twRes.Write("Death");
+        twRes.Close();
+        
+        SceneManager.LoadScene("Office");
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape)) {
+            TextWriter twRes = new StreamWriter(resultPath); //write new inventory
+            twRes.Write("Win");
+            twRes.Close();
+
             SceneManager.LoadScene("Office");
         }
     }

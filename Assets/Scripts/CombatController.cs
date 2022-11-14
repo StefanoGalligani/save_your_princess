@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class CombatController : MonoBehaviour, LivingCreature
 {
     public float health = 5;
+    private bool dead = false;
     Weapon weapon;
 
     void Start()
@@ -24,8 +25,9 @@ public class CombatController : MonoBehaviour, LivingCreature
     public void Damage(float d)
     {
         health -= d;
-        if (health < 0.01) {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        if (health < 0.01 && !dead) {
+            dead = true;
+            FindObjectOfType<MissionManager>().Death();
         }
     }
 }
