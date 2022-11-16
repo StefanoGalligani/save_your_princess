@@ -11,12 +11,14 @@ public class GameManager : MonoBehaviour
     public GameObject[] menus;
     public RectTransform missionContainer;
     public RectTransform equipmentContainer;
+    public TextMeshProUGUI coinsText;
     public GameObject missionTile;
     public GameObject detailedInfoScroll;
     private int missionsPerDay = 1;
     private int floor = 1;
     private int assistants = 1;
     private int upgrades = 0;
+    private int coins = 0;
     private List<MissionInfo> missions;
     private string listPath;
     private string infoPath;
@@ -91,8 +93,15 @@ public class GameManager : MonoBehaviour
 
             TextWriter tw = new StreamWriter(coinsPath);
             tw.WriteLine("10");
+            coins = 10;
             tw.Close();
+        } else {
+            TextReader tr = new StreamReader(coinsPath);
+            coins = int.Parse(tr.ReadLine());
+            tr.Close();
         }
+        coinsText.text=""+coins;
+
         if (!File.Exists(inventoryPath)) {
             File.Create(inventoryPath).Close();
 
@@ -109,6 +118,16 @@ public class GameManager : MonoBehaviour
             tw.WriteLine(line);
             tw.Close();
         }
+    }
+
+    private void UpdateCoins() {
+        File.Create(coinsPath).Close();
+
+        TextWriter tw = new StreamWriter(coinsPath);
+        tw.WriteLine(""+coins);
+        tw.Close();
+
+        coinsText.text = ""+coins;
     }
 
     public void ShowEquipment() {
@@ -171,13 +190,14 @@ public class GameManager : MonoBehaviour
             File.Create(listPath).Close();
 
             TextWriter tw = new StreamWriter(listPath);
-            string line = "Name:Jasmine;Diff:1;Days:5;Map:Forest;Time:Noon;Coins:100;Items:Boots,Sword;Story:prova";
+            string line = "Name:Jasmine;Diff:1;Days:5;Map:Forest;Time:Noon;Coins:100;Items:Boots_Leather,Sword;Story:prova";
             tw.WriteLine(line);
             tw.Close();
         }
         else if (File.Exists(infoPath))
         {
-            File.Delete(infoPath); //prima di eliminarlo va letta la missione per le ricompense
+            WinRewards();
+            File.Delete(infoPath);
             TextWriter tw = new StreamWriter(listPath, true);
             for (int i=0; i<missionsPerDay; i++) {
                 string line = GenerateMission();
@@ -185,6 +205,27 @@ public class GameManager : MonoBehaviour
             }
             tw.Close();
         }
+    }
+
+    private void WinRewards() {
+        if (!File.Exists(resultPath)) return;
+        TextReader trRes = new StreamReader(resultPath);
+        string res = trRes.ReadLine();
+        trRes.Close();
+        if (res != "Win") return;
+
+        TextReader tr = new StreamReader(infoPath);
+        MissionInfo m = MissionInfo.FromString(tr.ReadLine());
+        tr.Close();
+
+        coins += m.coins;
+        UpdateCoins();
+
+        TextWriter tw = new StreamWriter(inventoryPath, true);
+        for (int i=0; i<m.items.Length; i++) {
+            tw.WriteLine(m.items[i]);
+        }
+        tw.Close();
     }
 
     private string GenerateMission() {

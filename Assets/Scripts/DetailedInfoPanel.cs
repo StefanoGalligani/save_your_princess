@@ -24,10 +24,11 @@ public class DetailedInfoPanel : MonoBehaviour
         storyTxt.text = info.story;
         locationTxt.text = info.map;
         timeTxt.text = info.time;
-        if (info.coins > 0)
-            rewardTxt.text = "" + info.coins + "\n";
+        if (info.coins > 0) {
+            rewardTxt.text = "" + info.coins + " coins\n";
+        }
         foreach (string rew in info.items)
-            rewardTxt.text = rew + "\n";
+            rewardTxt.text += rew + "\n";
     }
 
     public void LaunchCurrentMission() {

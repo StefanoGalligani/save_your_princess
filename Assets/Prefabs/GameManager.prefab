@@ -44,3 +44,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e124d325cdbb443b69fdb97b40303c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menus:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  missionContainer: {fileID: 0}
+  equipmentContainer: {fileID: 0}
+  coinsText: {fileID: 0}
+  missionTile: {fileID: 4061740168649337787, guid: 1f8139d969ede2b499cc13418921cf70, type: 3}
+  detailedInfoScroll: {fileID: 0}
