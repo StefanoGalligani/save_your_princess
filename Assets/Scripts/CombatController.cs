@@ -24,6 +24,7 @@ public class CombatController : MonoBehaviour, LivingCreature
 
     public void Damage(float d)
     {
+        d -= d/37 * FindObjectOfType<MissionManager>().def;
         health -= d;
         if (health < 0.01 && !dead) {
             dead = true;

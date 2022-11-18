@@ -10,6 +10,7 @@ public class MissionManager : MonoBehaviour
     public GameObject skyContainer;
     public int diff {get; private set;}
     public string time {get; private set;}
+    public int def {get; private set;} = 0;
     private string inventoryPath;
     private string equipmentPath;
     private string resultPath;
@@ -109,18 +110,26 @@ public class MissionManager : MonoBehaviour
         }
         twInv.Close();
         
-        TextWriter twRes = new StreamWriter(resultPath); //write new inventory
+        TextWriter twRes = new StreamWriter(resultPath);
         twRes.Write("Death");
         twRes.Close();
         
         SceneManager.LoadScene("Office");
     }
 
+    public void Win() {
+        TextWriter twRes = new StreamWriter(resultPath);
+        twRes.Write("Win");
+        twRes.Close();
+
+        SceneManager.LoadScene("Office");
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape)) {
-            TextWriter twRes = new StreamWriter(resultPath); //write new inventory
-            twRes.Write("Win");
+            TextWriter twRes = new StreamWriter(resultPath);
+            twRes.Write("Draw");
             twRes.Close();
 
             SceneManager.LoadScene("Office");

@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] menus;
     public RectTransform missionContainer;
     public RectTransform equipmentContainer;
+    public TextMeshProUGUI coinsLabel;
     public TextMeshProUGUI coinsText;
     public GameObject missionTile;
     public GameObject detailedInfoScroll;
@@ -79,12 +80,42 @@ public class GameManager : MonoBehaviour
             }
             tr.Close();
         }
-        //mostrare nei dropdown i powerup dell'edificio
         int day = PlayerPrefs.GetInt("Day");
         PlayerPrefs.SetInt("Day", ++day);
         for (int i=1; i<= upgrades; i++) {
             if (day%(upgrades+1) == 0) missionsPerDay++;
         }
+
+        FindObjectOfType<PowerupsMenu>().UpdateTexts(floor, assistants, upgrades);
+    }
+
+    public void AcceptPowerup(int powerup, int[] prices) {
+        if (powerup == 0) {
+            if (floor >= prices.Length || coins < prices[floor]) return;
+            coins -= prices[floor];
+            floor++;
+        }
+        
+        if (powerup == 1) {
+            if (assistants >= floor*2 || coins < prices[assistants]) return;
+            coins -= prices[assistants];
+            assistants++;
+        }
+        
+        if (powerup == 2) {
+            if (upgrades >= prices.Length || coins < prices[upgrades]) return;
+            coins -= prices[upgrades];
+            upgrades++;
+        }
+        coinsText.text=""+coins;
+        UpdateCoins();
+        
+        File.Create(buildingPowerupsPath).Close();
+        TextWriter tw = new StreamWriter(buildingPowerupsPath);
+        tw.WriteLine("Floors:" + floor + ";Assistants:" + assistants + ";Upgrades:" + upgrades);
+        tw.Close();
+
+        FindObjectOfType<PowerupsMenu>().UpdateTexts(floor, assistants, upgrades);
     }
 
     private void InitInventory() {
@@ -275,7 +306,10 @@ public class GameManager : MonoBehaviour
                 break;
         }
         m.coins = assistants*2 + Random.Range(-assistants, +assistants);
-        m.items = new string[]{""};
+        m.items = new string[Random.Range(0, upgrades+1)];
+        for (int i=0; i<m.items.Length; i++) {
+            m.items[i] = ItemsDictionary.GetInstance().GetRandomItemOfRarityUpTo(floor);
+        }
         m.story = "story";
         return m.ToString();
     }
@@ -323,5 +357,7 @@ public class GameManager : MonoBehaviour
         for (int i=0; i<menus.Length; i++) {
             menus[i].SetActive(i==m);
         }
+        coinsText.gameObject.SetActive(m>2);
+        coinsLabel.gameObject.SetActive(m>2);
     }
 }
