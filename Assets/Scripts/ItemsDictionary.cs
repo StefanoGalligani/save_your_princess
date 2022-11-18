@@ -46,7 +46,7 @@ public class ItemsDictionary
     public string GetRandomItemOfRarity(int r) {
         List<string> viableItems = new List<string>();
         for (int i=0; i<itemsRarity.Count; i++) {
-            if (itemsRarity.ElementAt(i).Value <= r) viableItems.Add(itemsStats.ElementAt(i).Key);
+            if (itemsRarity.ElementAt(i).Value == r) viableItems.Add(itemsStats.ElementAt(i).Key);
         }
         return viableItems.ElementAt(Random.Range(0, viableItems.Count));
     }
@@ -54,7 +54,7 @@ public class ItemsDictionary
     public string GetRandomItemOfRarityUpTo(int r) {
         List<string> viableItems = new List<string>();
         for (int i=0; i<itemsRarity.Count; i++) {
-            if (itemsRarity.ElementAt(i).Value == r) viableItems.Add(itemsStats.ElementAt(i).Key);
+            if (itemsRarity.ElementAt(i).Value <= r) viableItems.Add(itemsStats.ElementAt(i).Key);
         }
         return viableItems.ElementAt(Random.Range(0, viableItems.Count));
     }

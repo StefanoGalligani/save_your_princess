@@ -305,10 +305,10 @@ public class GameManager : MonoBehaviour
                 m.time = "Night";
                 break;
         }
-        m.coins = assistants*2 + Random.Range(-assistants, +assistants);
+        m.coins = upgrades*3 + assistants*2 + Random.Range(-assistants, +assistants);
         m.items = new string[Random.Range(0, upgrades+1)];
         for (int i=0; i<m.items.Length; i++) {
-            m.items[i] = ItemsDictionary.GetInstance().GetRandomItemOfRarityUpTo(floor);
+            m.items[i] = ItemsDictionary.GetInstance().GetRandomItemOfRarityUpTo(assistants);
         }
         m.story = "story";
         return m.ToString();
