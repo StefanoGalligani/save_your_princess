@@ -8,12 +8,15 @@ public class MissionManager : MonoBehaviour
 {
     public Light sun;
     public GameObject skyContainer;
+    public GameObject pausePanel;
     public int diff {get; private set;}
     public string time {get; private set;}
     public int def {get; private set;} = 0;
     private string inventoryPath;
     private string equipmentPath;
     private string resultPath;
+    private bool paused = false;
+    private float currentTimeScale = 1;
 
     void Start() {
         string temp = Application.persistentDataPath;
@@ -30,6 +33,8 @@ public class MissionManager : MonoBehaviour
             Debug.Log("Missing file");
             SceneManager.LoadScene("Office");
         }
+
+        pausePanel.SetActive(false);
 
     }
 
@@ -114,6 +119,7 @@ public class MissionManager : MonoBehaviour
         twRes.Write("Death");
         twRes.Close();
         
+        Time.timeScale = 1;
         SceneManager.LoadScene("Office");
     }
 
@@ -122,17 +128,32 @@ public class MissionManager : MonoBehaviour
         twRes.Write("Win");
         twRes.Close();
 
+        Time.timeScale = 1;
+        SceneManager.LoadScene("Office");
+    }
+
+    public void BackToMenu() {
+        TextWriter twRes = new StreamWriter(resultPath);
+        twRes.Write("Draw");
+        twRes.Close();
+
+        Time.timeScale = 1;
         SceneManager.LoadScene("Office");
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape)) {
-            TextWriter twRes = new StreamWriter(resultPath);
-            twRes.Write("Draw");
-            twRes.Close();
-
-            SceneManager.LoadScene("Office");
+            SetPause(!paused);
         }
+    }
+
+    public void SetPause(bool p) {
+        paused = p;
+        Time.timeScale = p ? 0 : currentTimeScale;
+        pausePanel.SetActive(p);
+        
+        Cursor.lockState = p ? CursorLockMode.Confined : CursorLockMode.Locked;
+        Cursor.visible = p;
     }
 }

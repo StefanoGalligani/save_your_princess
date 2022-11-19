@@ -295,8 +295,18 @@ public class GameManager : MonoBehaviour
         for (int i=0; i<m.items.Length; i++) {
             m.items[i] = ItemsDictionary.GetInstance().GetRandomItemOfRarityUpTo(assistants);
         }
-        m.story = "story";
+        m.story = GenerateStory(m.princess);
         return m.ToString();
+    }
+
+    private string GenerateStory(string name) {
+        string story = "";
+        string[] activities = {"just minding her business", "having a swim", "studying game developement", "reading a book about social psychology", "explaining her butler why the earth is flat"};
+        string activity = activities[Random.Range(0, activities.Length)];
+        string[] beginning = {"While princess " + name + " was " + activity + ", ", "Princess " + name + " was " + activity + " when "};
+        string[] kidnappers = {"a goblin gang", "an evil lord", "some guy who was passing by", "a not so friedly ogre", "an actual ghost", "unexpected consequences", "her dreams", "nobody in particular", "the decadence of society", "the wrong path", "her friend who was secretly a kidnapper", "five invisible dwarves", "a possessed pony", "a british rock band of the 70s"};
+        story = beginning[Random.Range(0, beginning.Length)] + kidnappers[Random.Range(0, kidnappers.Length)] + " took her away from her castle";
+        return story;
     }
 
     public void LaunchMission(MissionInfo mission) {
