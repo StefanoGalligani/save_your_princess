@@ -9,18 +9,25 @@ public class Enemy : MonoBehaviour, LivingCreature
     public float health = 5;
     public float attackTime = 1;
     public float firstAttackTime = .2f;
+    public Vector2 thresholdDistances = new Vector2(15, 25);
 
     float counter = 0;
     Weapon weapon;
     Transform target;
     Rigidbody rb;
-    bool followTarget = true;
+    bool followTarget = false;
 
     void Start() {
         target = Camera.main.transform.parent;
         rb = GetComponent<Rigidbody>();
         weapon = GetComponentInChildren<Weapon>();
         weapon.SetOwner(gameObject);
+    }
+
+    void Update() {
+        float sqrDist = (target.position - transform.position).sqrMagnitude;
+        if (sqrDist <= thresholdDistances.x*thresholdDistances.x) followTarget = true;
+        if (sqrDist >= thresholdDistances.y*thresholdDistances.y) followTarget = false;
     }
 
     void FixedUpdate() {

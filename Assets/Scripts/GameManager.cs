@@ -43,9 +43,9 @@ public class GameManager : MonoBehaviour
         missions = new List<MissionInfo>();
 
         InitPowerups();
+        WriteNewMissions();
         InitInventory();
         ShowEquipment();
-        WriteNewMissions();
         ShowMissions();
         ChangeMenu(0);
         
@@ -261,25 +261,10 @@ public class GameManager : MonoBehaviour
 
     private string GenerateMission() {
         MissionInfo m = new MissionInfo();
-        switch(Random.Range(0,5)) { //todo: read random name from a file
-            case (0):
-                m.princess = "Emily";
-                break;
-            case (1):
-                m.princess = "Jessamine";
-                break;
-            case (2):
-                m.princess = "Anastasia";
-                break;
-            case (3):
-                m.princess = "Constantine";
-                break;
-            case (4):
-                m.princess = "Beatrice";
-                break;
-        }
+        string[] princesses = {"Emily", "Jessamine", "Anastasia", "Constantine", "Beatrice"};
+        m.princess = princesses[Random.Range(0, princesses.Length)];
         m.diff = Mathf.Min(4, Random.Range(1, assistants/2+1));
-        m.days = assistants/2+1;
+        m.days = Random.Range(1, assistants/2+1);
         switch(Random.Range(0,4)) {
             case (0):
                 m.map = "Tower";
