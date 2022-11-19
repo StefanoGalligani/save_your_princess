@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 84a820aff75ad22478e929082f0ab499, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8b6f75f894455954aa971b4e63a33291, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 3841766885468028509}
   - component: {fileID: 8447962792517761620}
   m_Layer: 0
-  m_Name: Ogre
+  m_Name: Ogre_strong
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -216,12 +216,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9281c60220d2f5e43b70a63636867fb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1.5
+  speed: 3
   distanceToAttack: 5
-  health: 20
-  attackTime: 1.2
+  health: 30
+  attackTime: 1
   firstAttackTime: 0.2
-  thresholdDistances: {x: 20, y: 35}
+  thresholdDistances: {x: 30, y: 50}
 --- !u!65 &3841766885468028509
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -275,7 +275,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8827151489039544598}
   m_LocalRotation: {x: -0, y: 0.08715578, z: -0, w: 0.9961947}
-  m_LocalPosition: {x: 0.8, y: -0.2, z: 0.2}
+  m_LocalPosition: {x: 0.8, y: 0.3, z: 0.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

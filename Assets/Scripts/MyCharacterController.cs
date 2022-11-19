@@ -8,14 +8,16 @@ public class MyCharacterController : MonoBehaviour
     public float jumpForce = 10;
     public float rotSpeed = 20;
     Camera cam;
+    Rigidbody rb;
     
     private void Start() {
         cam = GetComponentInChildren<Camera>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        rb = GetComponent<Rigidbody>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         HandleInput();
     }
@@ -25,10 +27,10 @@ public class MyCharacterController : MonoBehaviour
     }
 
     private void HandleInput() {
-        Vector3 movement = CalcMovementDir() * Time.deltaTime * speed;
-        GetComponent<Rigidbody>().MovePosition(transform.position + movement);
+        Vector3 movement = CalcMovementDir() * speed;
+        rb.velocity = new Vector3(movement.x, rb.velocity.y, movement.z);
         if (Input.GetKeyDown(KeyCode.Space) && OnGround()) {
-            GetComponent<Rigidbody>().AddForce(transform.up * jumpForce, ForceMode.Impulse);
+            rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
         }
     }
 
@@ -51,7 +53,8 @@ public class MyCharacterController : MonoBehaviour
     }
 
     private bool OnGround() {
-        return Physics.Raycast(transform.position, -transform.up, 0.76f);
+        RaycastHit hit;
+        return Physics.SphereCast(transform.position, 0.25f, -transform.up, out hit, 0.6f);
     }
 
     private void MouseLook() {

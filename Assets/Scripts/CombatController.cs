@@ -9,12 +9,14 @@ public class CombatController : MonoBehaviour, LivingCreature
     private bool dead = false;
     Weapon weapon;
     Princess p;
+    SpriteRenderer pSprite;
     private bool holdingPrincess = false;
 
     void Start()
     {
         weapon = GetComponentInChildren<Weapon>();
         weapon.SetOwner(gameObject);
+        pSprite = Camera.main.GetComponentInChildren<SpriteRenderer>();
     }
 
     void Update()
@@ -30,6 +32,7 @@ public class CombatController : MonoBehaviour, LivingCreature
     }
 
     private void SetHoldingPrincess(bool h) {
+        pSprite.enabled = h;
         weapon.gameObject.SetActive(!h);
         p.gameObject.SetActive(!h);
         p.transform.position = transform.position + transform.forward*0.2f;
