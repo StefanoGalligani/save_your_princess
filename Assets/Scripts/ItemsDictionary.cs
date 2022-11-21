@@ -24,10 +24,10 @@ public class ItemsDictionary
         AddItem("Chestplate_Leather", 8, 3);
         AddItem("Chestplate_Iron", 12, 5, 2);
         AddItem("Chestplate_Ancestral", 30, 10, 6);
-        AddItem("Boots_Leather", 7, 1);
-        AddItem("Boots_Iron", 15, 5, 3);
-        AddItem("Boots_Ancestral", 50, 10, 8);
-        AddItem("Boots_HighJump", 40, 5, 5);
+        AddItem("Boots_Leather", 7, 4);
+        AddItem("Boots_Iron", 15, 9, 3);
+        AddItem("Boots_Ancestral", 50, 13, 8);
+        AddItem("Boots_HighJump", 40, 8, 5);
         AddItem("Weapon_AirSword", 30, 5, 7);
         AddItem("Weapon_VampireSword", 30, 4, 7);
         AddItem("Weapon_MagicRod", 30, 5, 7);

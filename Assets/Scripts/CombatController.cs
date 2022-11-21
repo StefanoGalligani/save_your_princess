@@ -14,9 +14,12 @@ public class CombatController : MonoBehaviour, LivingCreature
 
     void Start()
     {
-        weapon = GetComponentInChildren<Weapon>();
-        weapon.SetOwner(gameObject);
         pSprite = Camera.main.GetComponentInChildren<SpriteRenderer>();
+    }
+
+    public void SetWeapon(Weapon w) {
+        weapon = w;
+        weapon.SetOwner(gameObject);
     }
 
     void Update()

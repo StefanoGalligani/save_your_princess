@@ -1,0 +1,13 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RodController
+  m_Controller: {fileID: 9100000, guid: 85c331ee5d84cca49abe1f57bf91b04b, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: c5edfa2b61b2ce042ad526e784253566, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 3800b12351155504a9bab79e64500b02, type: 2}

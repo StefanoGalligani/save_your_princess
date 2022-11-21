@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
+using System.Linq;
 
 public class MissionManager : MonoBehaviour
 {
+    public string[] weaponNames;
+    public GameObject[] weaponPrefabs;
     public Light sun;
     public GameObject skyContainer;
     public GameObject pausePanel;
     public int diff {get; private set;}
     public string time {get; private set;}
     public int def {get; private set;} = 0;
+    public GameObject player;
     private string inventoryPath;
     private string equipmentPath;
     private string resultPath;
@@ -35,7 +39,45 @@ public class MissionManager : MonoBehaviour
         }
 
         pausePanel.SetActive(false);
+        SetupEquipment();
+    }
 
+    private void SetupEquipment() {
+        TextReader tr = new StreamReader(equipmentPath);
+        string[] lines = tr.ReadLine().Split(";");
+        foreach(string l in lines) {
+            string[] splits = l.Split(':');
+            if (splits[1]!="") {
+                int stat = ItemsDictionary.GetInstance().GetItemStat(splits[1]);
+                switch (splits[0]) {
+                    case "Helmet":
+                        def+=stat;
+                        break;
+                    case "Chestplate":
+                        def+=stat;
+                        break;
+                    case "Boots":
+                        FindObjectOfType<MyCharacterController>().speed = stat;
+                        if (splits[1] == "Boots_HighJump") FindObjectOfType<MyCharacterController>().jumpForce = 8;
+                        break;
+                    case "Weapon":
+                        GameObject w = weaponPrefabs[System.Array.IndexOf(weaponNames, splits[1])];
+                        w.GetComponent<Weapon>().damage = stat;
+                        GameObject wInstance = Instantiate(w, player.transform.GetChild(1));
+                        player.GetComponent<CombatController>().SetWeapon(wInstance.GetComponent<Weapon>());
+                        break;
+                    case "Talisman":
+                        if (splits[1] == "Talisman_Protection") def+=stat;
+                        if (splits[1] == "Talisman_Life") {}
+                        break;
+                    case "Ring":
+                        if (splits[1] == "Ring_Stun") {};
+                        if (splits[1] == "Ring_Stun") {}
+                        break;
+                }
+            }
+        }
+        tr.Close();
     }
 
     private void Setup(string sPath) {

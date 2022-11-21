@@ -5,6 +5,7 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     public float damage = 2;
+    public GameObject projectile;
     private bool isAttacking = false;
     private Animator anim;
     private GameObject owner;
@@ -26,7 +27,15 @@ public class Weapon : MonoBehaviour
 
     public void FinishAttacking() {
         isAttacking = false;
+        if (projectile != null) ShootProjectile();
         GetComponent<Collider>().enabled = false;
+    }
+
+    private void ShootProjectile() {
+        GameObject p = Instantiate(projectile);
+        p.transform.position = transform.position + Vector3.up*0.5f + owner.transform.forward*0.2f;
+        p.GetComponent<Projectile>().SetOwner(owner);
+        p.GetComponent<Projectile>().Shoot(owner.transform.forward);
     }
 
     public void OnTriggerEnter(Collider coll) {
