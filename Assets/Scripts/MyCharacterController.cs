@@ -11,12 +11,14 @@ public class MyCharacterController : MonoBehaviour
     Camera cam;
     Rigidbody rb;
     Vector3 horizForward;
+    LayerMask m;
     
     private void Start() {
         cam = GetComponentInChildren<Camera>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         rb = GetComponent<Rigidbody>();
+        m = ~LayerMask.NameToLayer("Player");
     }
 
     void FixedUpdate()
@@ -45,7 +47,6 @@ public class MyCharacterController : MonoBehaviour
 
     private float CalcSpeedMultiplier() {
         if (!onGround) return 1;
-        LayerMask m = ~LayerMask.NameToLayer("Player");
         float e = 0.1f;
         RaycastHit hit;
         float h1=0, h2=0;
@@ -74,7 +75,7 @@ public class MyCharacterController : MonoBehaviour
 
     private bool OnGround() {
         RaycastHit hit;
-        return Physics.SphereCast(transform.position, 0.5f, -transform.up, out hit, 0.6f);
+        return Physics.SphereCast(transform.position, 0.5f, -transform.up, out hit, 0.75f, m);
     }
 
     private void MouseLook() {
