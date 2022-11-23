@@ -52,7 +52,12 @@ public class Enemy : MonoBehaviour, LivingCreature
         if (health < 0.001f) {
             Destroy(gameObject);
         }
-    } 
+    }
+
+    public void Heal(float h) {
+        health += h;
+    }
+
 
     void LateUpdate()
     {

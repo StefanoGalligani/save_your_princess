@@ -52,6 +52,10 @@ public class CombatController : MonoBehaviour, LivingCreature
         StartCoroutine(InvincibilityTime());
     }
 
+    public void Heal(float h) {
+        health = Mathf.Min(maxHealth, health + h);
+    }
+
     private IEnumerator InvincibilityTime() {
         yield return new WaitForSeconds(0.5f);
         dead = false;

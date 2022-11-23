@@ -5,4 +5,5 @@ using UnityEngine;
 public interface LivingCreature
 {
     void Damage(float d);
+    void Heal(float h);
 }

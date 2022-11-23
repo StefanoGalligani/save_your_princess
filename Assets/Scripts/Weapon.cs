@@ -6,6 +6,7 @@ public class Weapon : MonoBehaviour
 {
     public float damage = 2;
     public GameObject projectile;
+    public bool vampire = false;
     private bool isAttacking = false;
     private Animator anim;
     private GameObject owner;
@@ -39,8 +40,11 @@ public class Weapon : MonoBehaviour
 
     public void OnTriggerEnter(Collider coll) {
         if (isAttacking && coll.GetComponent<LivingCreature>() != null) {
-            if (!coll.gameObject.Equals(owner))
+            if (!coll.gameObject.Equals(owner)) {
                 coll.gameObject.GetComponent<LivingCreature>().Damage(damage);
+                if (vampire)
+                    owner.GetComponent<LivingCreature>().Heal(damage/3);
+            }
         }
     }
 }

@@ -36,7 +36,7 @@ public class MyCharacterController : MonoBehaviour
         Vector3 movement = CalcMovementDir() * CalcSpeedMultiplier() * speed;
         rb.velocity = new Vector3(movement.x, rb.velocity.y, movement.z);
         if (Input.GetKeyDown(KeyCode.Space) && onGround) {
-            rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+            rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
         }
     }
 
@@ -75,7 +75,8 @@ public class MyCharacterController : MonoBehaviour
 
     private bool OnGround() {
         RaycastHit hit;
-        return Physics.SphereCast(transform.position, 0.5f, -transform.up, out hit, 0.75f, m);
+        bool g = Physics.SphereCast(transform.position, 0.49f, -transform.up, out hit, 1f, ~LayerMask.NameToLayer("Floor"));
+        return g;
     }
 
     private void MouseLook() {
