@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class CombatController : MonoBehaviour, LivingCreature
 {
-    public float health = 5;
+    public float maxHealth = 5;
+    private float health;
     private bool dead = false;
     Weapon weapon;
     Princess p;
@@ -14,6 +15,7 @@ public class CombatController : MonoBehaviour, LivingCreature
 
     void Start()
     {
+        health = maxHealth;
         pSprite = Camera.main.GetComponentInChildren<SpriteRenderer>();
     }
 
@@ -26,6 +28,9 @@ public class CombatController : MonoBehaviour, LivingCreature
     {
         if (!holdingPrincess && Input.GetMouseButtonDown(0)) {
             weapon.StartAttacking();
+        }
+        if (Input.GetMouseButtonDown(1)) {
+            FindObjectOfType<MissionManager>().SlowTime();
         }
         if (Input.GetKeyDown(KeyCode.E)) {
             if (!p) p = FindObjectOfType<Princess>();
@@ -42,15 +47,28 @@ public class CombatController : MonoBehaviour, LivingCreature
         holdingPrincess = h;
     }
 
+    public void Respawn() {
+        health = maxHealth;
+        StartCoroutine(InvincibilityTime());
+    }
+
+    private IEnumerator InvincibilityTime() {
+        yield return new WaitForSeconds(0.5f);
+        dead = false;
+    }
+
     public void Damage(float d)
     {
+        if (dead) return;
+
         d -= d/37 * FindObjectOfType<MissionManager>().def;
-        health -= d;        
+        health -= d;
+
         if (holdingPrincess) {
             SetHoldingPrincess(false);
         }
 
-        if (health < 0.01 && !dead) {
+        if (health < 0.01) {
             dead = true;
             FindObjectOfType<MissionManager>().Death();
         }

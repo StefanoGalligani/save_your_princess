@@ -352,7 +352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09866122bc5a37a4eb6fd8afd81a856f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 5
+  maxHealth: 5
 --- !u!1001 &135761852
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1794,13 +1794,15 @@ MonoBehaviour:
   - Weapon_AirSword
   - Weapon_VampireSword
   - Weapon_MagicRod
+  - Weapon_Fist
   weaponPrefabs:
   - {fileID: 2577591600057480423, guid: 07bc1f1642102954b9ddb579b27be0a6, type: 3}
   - {fileID: 2577591600057480423, guid: 1b493cec4b565a5468a72346f78bcd8e, type: 3}
   - {fileID: 2577591600057480423, guid: f53183cebf2f32f4dbdc388f711802e1, type: 3}
-  - {fileID: 2577591600057480423, guid: 07bc1f1642102954b9ddb579b27be0a6, type: 3}
+  - {fileID: 2577591600057480423, guid: b8749bb58d660f940b38a499e39129b7, type: 3}
   - {fileID: 2577591600057480423, guid: 07bc1f1642102954b9ddb579b27be0a6, type: 3}
   - {fileID: 2577591600057480423, guid: 40c7cb8fe390de642adb5a478b00583a, type: 3}
+  - {fileID: 2577591600057480423, guid: c31fdec15af7206499286a6cd786258b, type: 3}
   sun: {fileID: 211293683}
   skyContainer: {fileID: 55016717}
   pausePanel: {fileID: 1136586825}

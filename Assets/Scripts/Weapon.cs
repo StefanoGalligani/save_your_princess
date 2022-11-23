@@ -27,11 +27,10 @@ public class Weapon : MonoBehaviour
 
     public void FinishAttacking() {
         isAttacking = false;
-        if (projectile != null) ShootProjectile();
         GetComponent<Collider>().enabled = false;
     }
 
-    private void ShootProjectile() {
+    public void ShootProjectile() {
         GameObject p = Instantiate(projectile);
         p.transform.position = transform.position + Vector3.up*0.5f + owner.transform.forward*0.2f;
         p.GetComponent<Projectile>().SetOwner(owner);

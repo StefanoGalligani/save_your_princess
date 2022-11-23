@@ -35,6 +35,7 @@ public class ItemsDictionary
         AddItem("Talisman_Protection", 30, 10, 5);
         AddItem("Ring_Stun", 20, 2, 2);
         AddItem("Ring_SlowTime", 30, 2, 4);
+        AddItem("Weapon_Fist", 0, 1, 10);
     }
 
     private void AddItem(string name, int price, int stat, int rarity=0) {

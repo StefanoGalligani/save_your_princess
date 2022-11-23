@@ -21,6 +21,8 @@ public class MissionManager : MonoBehaviour
     private string resultPath;
     private bool paused = false;
     private float currentTimeScale = 1;
+    private bool secondLife = false;
+    private int ring = 0;
 
     void Start() {
         string temp = Application.persistentDataPath;
@@ -47,7 +49,8 @@ public class MissionManager : MonoBehaviour
         string[] lines = tr.ReadLine().Split(";");
         foreach(string l in lines) {
             string[] splits = l.Split(':');
-            if (splits[1]!="") {
+            if (splits[1]!="" || splits[0]=="Weapon") {
+                if(splits[1] == "") splits[1] = "Weapon_Fist";
                 int stat = ItemsDictionary.GetInstance().GetItemStat(splits[1]);
                 switch (splits[0]) {
                     case "Helmet":
@@ -62,17 +65,17 @@ public class MissionManager : MonoBehaviour
                         break;
                     case "Weapon":
                         GameObject w = weaponPrefabs[System.Array.IndexOf(weaponNames, splits[1])];
-                        w.GetComponent<Weapon>().damage = stat;
                         GameObject wInstance = Instantiate(w, player.transform.GetChild(1));
+                        wInstance.GetComponent<Weapon>().damage = stat;
                         player.GetComponent<CombatController>().SetWeapon(wInstance.GetComponent<Weapon>());
                         break;
                     case "Talisman":
-                        if (splits[1] == "Talisman_Protection") def+=stat;
-                        if (splits[1] == "Talisman_Life") {}
+                        if (splits[1] == "Talisman_Protection") def += stat;
+                        if (splits[1] == "Talisman_Life") secondLife = true;
                         break;
                     case "Ring":
-                        if (splits[1] == "Ring_Stun") {};
-                        if (splits[1] == "Ring_Stun") {}
+                        if (splits[1] == "Ring_Stun") ring = 1;
+                        if (splits[1] == "Ring_SlowTime") ring = 2;
                         break;
                 }
             }
@@ -129,6 +132,11 @@ public class MissionManager : MonoBehaviour
     }
 
     public void Death() {
+        if (secondLife) {
+            secondLife = false;
+            FindObjectOfType<CombatController>().Respawn();
+            return;
+        }
         TextReader trInv = new StreamReader(inventoryPath); //read inventory
         List<string> inventory = new List<string>();
         string line;
@@ -197,5 +205,19 @@ public class MissionManager : MonoBehaviour
         
         Cursor.lockState = p ? CursorLockMode.Confined : CursorLockMode.Locked;
         Cursor.visible = p;
+    }
+
+    public void SlowTime() {
+        if (currentTimeScale > 0.9f && ring == 2) {
+            Time.timeScale = 0.5f;
+            currentTimeScale = 0.5f;
+            StartCoroutine(RestoreTime());
+        }
+    }
+
+    private IEnumerator RestoreTime() {
+        yield return new WaitForSeconds(3);
+        Time.timeScale = 1;
+        currentTimeScale = 1;
     }
 }
