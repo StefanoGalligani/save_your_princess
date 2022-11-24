@@ -7,11 +7,15 @@ public class MyCharacterController : MonoBehaviour
     public float speed = 5;
     public float jumpForce = 10;
     public float rotSpeed = 20;
+    public float m_StepInterval;
+    public AudioClip[] m_FootstepSounds;
     bool onGround = true;
     Camera cam;
     Rigidbody rb;
     Vector3 horizForward;
     LayerMask m;
+    private float m_StepCycle = 0;
+    private float m_NextStep = 0;
     
     private void Start() {
         cam = GetComponentInChildren<Camera>();
@@ -26,6 +30,7 @@ public class MyCharacterController : MonoBehaviour
         onGround = OnGround();
         horizForward = new Vector3(transform.forward.x, 0, transform.forward.z);
         HandleInput();
+        ProgressStepCycle(speed);
     }
 
     void LateUpdate() {
@@ -75,7 +80,7 @@ public class MyCharacterController : MonoBehaviour
 
     private bool OnGround() {
         RaycastHit hit;
-        bool g = Physics.SphereCast(transform.position, 0.49f, -transform.up, out hit, 1f, ~LayerMask.NameToLayer("Floor"));
+        bool g = Physics.SphereCast(transform.position, 0.49f, -transform.up, out hit, .3f, ~LayerMask.NameToLayer("Floor"));
         return g;
     }
 
@@ -83,5 +88,40 @@ public class MyCharacterController : MonoBehaviour
         transform.Rotate(0, Input.GetAxis("Mouse X") * Time.deltaTime * rotSpeed, 0);
         if (Mathf.Cos(Mathf.PI / 180 * (cam.transform.localRotation.eulerAngles.x -Input.GetAxis("Mouse Y") * Time.deltaTime * rotSpeed)) > 0.5)
             cam.transform.Rotate(-Input.GetAxis("Mouse Y") * Time.deltaTime * rotSpeed, 0, 0);
+    }
+    
+    private void ProgressStepCycle(float speed)
+    {
+        if (CalcMovementDir().sqrMagnitude > 0.001f)
+        {
+            m_StepCycle += speed*Time.fixedDeltaTime;
+        }
+
+        if (!(m_StepCycle > m_NextStep))
+        {
+            return;
+        }
+
+        m_NextStep = m_StepCycle + m_StepInterval;
+
+        PlayFootStepAudio();
+    }
+
+
+    private void PlayFootStepAudio()
+    {
+        if (!onGround)
+        {
+            return;
+        }
+        // pick & play a random footstep sound from the array,
+        // excluding sound at index 0
+        int n = Random.Range(1, m_FootstepSounds.Length);
+        GetComponent<AudioSource>().clip = m_FootstepSounds[n];
+        GetComponent<AudioSource>().PlayOneShot(GetComponent<AudioSource>().clip);
+        // move picked sound to index 0 so it's not picked next time
+        m_FootstepSounds[n] = m_FootstepSounds[0];
+        m_FootstepSounds[0] = GetComponent<AudioSource>().clip;
+        GetComponent<AudioSource>().clip = null;
     }
 }

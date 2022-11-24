@@ -16,6 +16,7 @@ public class PowerupsMenu : MonoBehaviour
     public int[] floorsPrices;
     public int[] assistantsPrices;
     public int[] upgradesPrices;
+    public Transform buildingSprites;
 
     public void UpdateTexts(int floors, int assistants, int upgrades) {
         floorsTxt.text = "" + floors;
@@ -33,6 +34,10 @@ public class PowerupsMenu : MonoBehaviour
             upgradesPriceTxt.text = "" + upgradesPrices[upgrades];
         else
             upgradesPriceTxt.text = "";
+        
+        for (int i=0; i<4; i++) {
+            buildingSprites.GetChild(i).gameObject.SetActive(i==floors-1);
+        }
     }
 
     public void BuyPowerup(int powerup) {

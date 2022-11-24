@@ -341,6 +341,12 @@ MonoBehaviour:
   speed: 5
   jumpForce: 3
   rotSpeed: 100
+  m_StepInterval: 4
+  m_FootstepSounds:
+  - {fileID: 8300000, guid: 0548f861837fab348af48315cf6ba009, type: 3}
+  - {fileID: 8300000, guid: 148bc4a6b1908a54988a0ab47b12b59b, type: 3}
+  - {fileID: 8300000, guid: 910644d3acb11244eb0f0dc8cfbcbc79, type: 3}
+  - {fileID: 8300000, guid: a0961e13d447cd445bb86c2b1426d8db, type: 3}
 --- !u!114 &94922582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -367,7 +373,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
