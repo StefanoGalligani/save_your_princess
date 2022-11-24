@@ -42,6 +42,8 @@ public class Weapon : MonoBehaviour
         if (isAttacking && coll.GetComponent<LivingCreature>() != null) {
             if (!coll.gameObject.Equals(owner)) {
                 coll.gameObject.GetComponent<LivingCreature>().Damage(damage);
+                if (GetComponent<AudioSource>())
+                    GetComponent<AudioSource>().Play();
                 if (vampire)
                     owner.GetComponent<LivingCreature>().Heal(damage/3);
             }

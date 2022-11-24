@@ -16,6 +16,8 @@ public class MissionManager : MonoBehaviour
     public string time {get; private set;}
     public int def {get; private set;} = 0;
     public GameObject player;
+    public GameObject lifeImg;
+    public AudioClip[] soundtracks;
     private string inventoryPath;
     private string equipmentPath;
     private string resultPath;
@@ -39,6 +41,9 @@ public class MissionManager : MonoBehaviour
             Debug.Log("Missing file");
             SceneManager.LoadScene("Office");
         }
+
+        GetComponent<AudioSource>().clip = soundtracks[Random.Range(0, soundtracks.Length)];
+        GetComponent<AudioSource>().Play();
 
         pausePanel.SetActive(false);
         SetupEquipment();
@@ -71,7 +76,7 @@ public class MissionManager : MonoBehaviour
                         break;
                     case "Talisman":
                         if (splits[1] == "Talisman_Protection") def += stat;
-                        if (splits[1] == "Talisman_Life") secondLife = true;
+                        if (splits[1] == "Talisman_Life") { secondLife = true; lifeImg.SetActive(true); }
                         break;
                     case "Ring":
                         if (splits[1] == "Ring_Stun") ring = 1;
@@ -135,6 +140,7 @@ public class MissionManager : MonoBehaviour
         if (secondLife) {
             secondLife = false;
             FindObjectOfType<CombatController>().Respawn();
+            lifeImg.SetActive(false);
             return;
         }
         TextReader trInv = new StreamReader(inventoryPath); //read inventory

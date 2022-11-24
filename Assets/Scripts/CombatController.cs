@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class CombatController : MonoBehaviour, LivingCreature
 {
     public float maxHealth = 5;
+    public Image healthBar;
+    public AudioClip hitSound;
     private float health;
     private bool dead = false;
     Weapon weapon;
@@ -54,6 +57,7 @@ public class CombatController : MonoBehaviour, LivingCreature
 
     public void Heal(float h) {
         health = Mathf.Min(maxHealth, health + h);
+        healthBar.transform.localScale = new Vector3(health/maxHealth, 1, 1);
     }
 
     private IEnumerator InvincibilityTime() {
@@ -76,6 +80,9 @@ public class CombatController : MonoBehaviour, LivingCreature
             dead = true;
             FindObjectOfType<MissionManager>().Death();
         }
+        
+        healthBar.transform.localScale = new Vector3(health/maxHealth, 1, 1);
+        GetComponent<AudioSource>().PlayOneShot(hitSound);
     }
 
     public void OnTriggerEnter(Collider coll) {

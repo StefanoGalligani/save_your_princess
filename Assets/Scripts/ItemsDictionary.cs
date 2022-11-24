@@ -28,8 +28,8 @@ public class ItemsDictionary
         AddItem("Boots_Iron", 15, 9, 3);
         AddItem("Boots_Ancestral", 50, 13, 8);
         AddItem("Boots_HighJump", 40, 8, 5);
-        AddItem("Weapon_AirSword", 30, 5, 7);
-        AddItem("Weapon_VampireSword", 30, 4, 7);
+        AddItem("Weapon_AirSword", 30, 2, 7);
+        AddItem("Weapon_VampireSword", 30, 3, 7);
         AddItem("Weapon_MagicRod", 30, 5, 7);
         AddItem("Talisman_Life", 50, 2, 8);
         AddItem("Talisman_Protection", 30, 10, 5);
