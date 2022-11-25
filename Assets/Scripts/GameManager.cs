@@ -265,7 +265,7 @@ public class GameManager : MonoBehaviour
         m.princess = princesses[Random.Range(0, princesses.Length)];
         m.diff = Mathf.Min(4, Random.Range(1, assistants/2+1));
         m.days = Random.Range(1, assistants/2+1);
-        switch(Random.Range(0,4)) {
+        switch(Random.Range(0,3)) {
             case (0):
                 m.map = "Tower";
                 break;
@@ -273,9 +273,6 @@ public class GameManager : MonoBehaviour
                 m.map = "Forest";
                 break;
             case (2):
-                m.map = "Castle";
-                break;
-            case (3):
                 m.map = "Cavern";
                 break;
         }
@@ -352,7 +349,7 @@ public class GameManager : MonoBehaviour
         for (int i=0; i<menus.Length; i++) {
             menus[i].SetActive(i==m);
         }
-        coinsText.gameObject.SetActive(m>2);
-        coinsLabel.gameObject.SetActive(m>2);
+        coinsText.gameObject.SetActive(m==3 || m==4);
+        coinsLabel.gameObject.SetActive(m==3 || m==4);
     }
 }

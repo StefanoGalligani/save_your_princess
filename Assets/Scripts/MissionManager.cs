@@ -10,7 +10,8 @@ public class MissionManager : MonoBehaviour
     public string[] weaponNames;
     public GameObject[] weaponPrefabs;
     public Light sun;
-    public GameObject skyContainer;
+    public GameObject[] maps;
+    public GameObject[] skyContainers;
     public GameObject pausePanel;
     public int diff {get; private set;}
     public string time {get; private set;}
@@ -97,10 +98,17 @@ public class MissionManager : MonoBehaviour
             switch (splits[0]) {
                 case "Diff":
                     diff = int.Parse(splits[1]);
-                break;
+                    break;
                 case "Time":
                     time = splits[1];
-                break;
+                    break;
+                case "Map":
+                    int mapPos = splits[1]=="Forest" ? 0 : splits[1]=="Cavern" ? 1 : 2;
+                    for (int i=0; i<3; i++) {
+                        if (i==mapPos) maps[i].SetActive(true);
+                        else Destroy(maps[i]);
+                    }
+                    break;
             }
         }
         tr.Close();
@@ -116,15 +124,19 @@ public class MissionManager : MonoBehaviour
                 break;
             case "Dusk":
                 sun.transform.rotation = Quaternion.Euler(0, 0, 0);
-                foreach(SpriteRenderer rend in skyContainer.GetComponentsInChildren<SpriteRenderer>()) {
-                    rend.color = new Color(112/256f, 112/256f, 112/256f);
-                }
+                foreach (GameObject skyContainer in skyContainers)
+                    if (skyContainer != null)
+                    foreach(SpriteRenderer rend in skyContainer.GetComponentsInChildren<SpriteRenderer>()) {
+                        rend.color = new Color(112/256f, 112/256f, 112/256f);
+                    }
                 break;
             case "Night":
                 sun.gameObject.SetActive(false);
-                foreach(SpriteRenderer rend in skyContainer.GetComponentsInChildren<SpriteRenderer>()) {
-                    rend.color = new Color(42/256f, 33/256f, 58/256f);
-                }
+                foreach (GameObject skyContainer in skyContainers)
+                    if (skyContainer != null)
+                    foreach(SpriteRenderer rend in skyContainer.GetComponentsInChildren<SpriteRenderer>()) {
+                        rend.color = new Color(42/256f, 33/256f, 58/256f);
+                    }
                 break;
         }
     }
