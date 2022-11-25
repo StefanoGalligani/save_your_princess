@@ -1183,9 +1183,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 427368919}
   m_Direction: 0
   m_MinValue: 10
-  m_MaxValue: 50
+  m_MaxValue: 100
   m_WholeNumbers: 1
-  m_Value: 20
+  m_Value: 30
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -1551,11 +1551,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34bf243dd6c91724f91742874b8b5e3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settingsPath: 
-  musicSlider: {fileID: 0}
-  sfxSlider: {fileID: 0}
-  mouseSlider: {fileID: 0}
-  fullscreenToggle: {fileID: 0}
+  musicSlider: {fileID: 337018804}
+  sfxSlider: {fileID: 2145634895}
+  mouseSlider: {fileID: 1703316067}
+  fullscreenToggle: {fileID: 962306566}
 --- !u!1 &3286468447678111873
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI coinsText;
     public GameObject missionTile;
     public GameObject detailedInfoScroll;
+    public GameObject powerupsMenu;
     private int missionsPerDay = 1;
     private int floor = 1;
     private int assistants = 1;
@@ -86,7 +87,7 @@ public class GameManager : MonoBehaviour
             if (day%(upgrades+1) == 0) missionsPerDay++;
         }
 
-        FindObjectOfType<PowerupsMenu>().UpdateTexts(floor, assistants, upgrades);
+        powerupsMenu.GetComponent<PowerupsMenu>().UpdateTexts(floor, assistants, upgrades);
     }
 
     public void AcceptPowerup(int powerup, int[] prices) {
@@ -115,7 +116,7 @@ public class GameManager : MonoBehaviour
         tw.WriteLine("Floors:" + floor + ";Assistants:" + assistants + ";Upgrades:" + upgrades);
         tw.Close();
 
-        FindObjectOfType<PowerupsMenu>().UpdateTexts(floor, assistants, upgrades);
+        powerupsMenu.GetComponent<PowerupsMenu>().UpdateTexts(floor, assistants, upgrades);
     }
 
     private void InitInventory() {

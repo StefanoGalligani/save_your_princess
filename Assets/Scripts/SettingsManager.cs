@@ -6,11 +6,11 @@ using System.IO;
 
 public class SettingsManager : MonoBehaviour
 {
-    public string settingsPath;
     public Slider musicSlider;
     public Slider sfxSlider;
     public Slider mouseSlider;
     public Toggle fullscreenToggle;
+    string settingsPath;
     float musicVolume = 1;
     float sfxVolume = 1;
     float mouseSensitivity = 20;
