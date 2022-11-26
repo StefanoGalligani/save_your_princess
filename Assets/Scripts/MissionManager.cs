@@ -233,6 +233,17 @@ public class MissionManager : MonoBehaviour
         }
     }
 
+    public void StunEnemy(Vector3 pos) {
+        if (ring == 1) {
+            float r = 3*3;
+            foreach (Enemy e in FindObjectsOfType<Enemy>()) {
+                if ((e.transform.position - pos).sqrMagnitude < r) {
+                    e.Stun();
+                }
+            }
+        }
+    }
+
     private IEnumerator RestoreTime() {
         yield return new WaitForSeconds(3);
         Time.timeScale = 1;

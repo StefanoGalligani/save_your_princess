@@ -34,6 +34,7 @@ public class CombatController : MonoBehaviour, LivingCreature
         }
         if (Input.GetMouseButtonDown(1)) {
             FindObjectOfType<MissionManager>().SlowTime();
+            FindObjectOfType<MissionManager>().StunEnemy(transform.position + transform.forward*5);
         }
         if (Input.GetKeyDown(KeyCode.E)) {
             if (!p) p = FindObjectOfType<Princess>();

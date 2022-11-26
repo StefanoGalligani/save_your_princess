@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour, LivingCreature
     Transform target;
     Rigidbody rb;
     bool followTarget = false;
+    bool stunned = false;
 
     void Start() {
         target = Camera.main.transform.parent;
@@ -31,7 +32,7 @@ public class Enemy : MonoBehaviour, LivingCreature
     }
 
     void FixedUpdate() {
-        if (followTarget) {
+        if (followTarget && !stunned) {
             Vector3 direction = (target.position - transform.position);
             direction.y = 0;
             if (direction.sqrMagnitude > distanceToAttack*distanceToAttack) {
@@ -58,6 +59,15 @@ public class Enemy : MonoBehaviour, LivingCreature
         health += h;
     }
 
+    public void Stun() {
+        stunned = true;
+        StartCoroutine(RemoveStun());
+    }
+
+    private IEnumerator RemoveStun() {
+        yield return new WaitForSeconds(3);
+        stunned = false;
+    }
 
     void LateUpdate()
     {
