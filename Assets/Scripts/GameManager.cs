@@ -18,8 +18,8 @@ public class GameManager : MonoBehaviour
     public GameObject powerupsMenu;
     private int missionsPerDay = 1;
     private int floor = 1;
-    private int assistants = 1;
-    private int upgrades = 0;
+    public int assistants {private set; get;} = 1;
+    public int upgrades {private set; get;} = 0;
     private int coins = 0;
     private List<MissionInfo> missions;
     private string listPath;
@@ -352,5 +352,45 @@ public class GameManager : MonoBehaviour
         }
         coinsText.gameObject.SetActive(m==3 || m==4);
         coinsLabel.gameObject.SetActive(m==3 || m==4);
+    }
+
+    public void SoldItem(string name) {
+        coins += ItemsDictionary.GetInstance().GetItemPrice(name)/2;
+        UpdateCoins();
+
+        TextReader trInv = new StreamReader(inventoryPath); //read inventory
+        List<string> inventory = new List<string>();
+        string line;
+        while ((line = trInv.ReadLine()) != null && line != "") {
+            inventory.Add(line);
+        }
+        trInv.Close();
+
+        foreach(string s in inventory) {
+            if (s.Equals(name)) { inventory.Remove(s); break; }
+        }
+
+        TextWriter twInv = new StreamWriter(inventoryPath); //write new inventory
+        foreach(string s in inventory) {
+            twInv.WriteLine(s);
+        }
+        twInv.Close();
+        
+        ShowEquipment();
+        FindObjectOfType<ShopManager>().AddItemToBuyList(name);
+    }
+
+    public bool BuyItem(string name) {
+        if (coins < ItemsDictionary.GetInstance().GetItemPrice(name)) return false;
+        
+        TextWriter twInv = new StreamWriter(inventoryPath, true); //write new inventory
+        twInv.WriteLine(name);
+        twInv.Close();
+
+        ShowEquipment();
+
+        FindObjectOfType<ShopManager>().AddItemToSellList(name);
+        
+        return true;
     }
 }
