@@ -135,8 +135,8 @@ MonoBehaviour:
   speed: 2
   distanceToAttack: 3
   health: 8
-  attackTime: 0.8
-  firstAttackTime: 0.2
+  attackTime: 1.4
+  firstAttackTime: 0.5
   thresholdDistances: {x: 15, y: 25}
 --- !u!65 &3841766885468028509
 BoxCollider:

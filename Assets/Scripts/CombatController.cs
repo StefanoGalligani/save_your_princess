@@ -58,7 +58,7 @@ public class CombatController : MonoBehaviour, LivingCreature
 
     public void Heal(float h) {
         health = Mathf.Min(maxHealth, health + h);
-        healthBar.transform.localScale = new Vector3(health/maxHealth, 1, 1);
+        healthBar.transform.localScale = new Vector3(Mathf.Max(0, health/maxHealth), 1, 1);
     }
 
     private IEnumerator InvincibilityTime() {
