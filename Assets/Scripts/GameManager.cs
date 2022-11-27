@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
         int day = PlayerPrefs.GetInt("Day");
         PlayerPrefs.SetInt("Day", ++day);
         for (int i=1; i<= upgrades; i++) {
-            if (day%(upgrades+1) == 0) missionsPerDay++;
+            if (day%(i+1) == 0) missionsPerDay++;
         }
 
         powerupsMenu.GetComponent<PowerupsMenu>().UpdateTexts(floor, assistants, upgrades);
