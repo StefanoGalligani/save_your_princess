@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
     private string equipmentPath;
     private string buildingPowerupsPath;
     private string resultPath;
+    private int prevMenu = 0;
+    private int currentMenu = 0;
 
     void Start() {
         string temp = Application.persistentDataPath;
@@ -265,7 +267,8 @@ public class GameManager : MonoBehaviour
         MissionInfo m = new MissionInfo();
         string[] princesses = {"Emily", "Jessamine", "Anastasia", "Constantine", "Beatrice"};
         m.princess = princesses[Random.Range(0, princesses.Length)];
-        m.diff = Mathf.Min(4, Random.Range(1, assistants/2+1));
+        int diffValue = Random.Range(1, upgrades+1);
+        m.diff = Mathf.Min(4, diffValue);
         m.days = Random.Range(1, assistants/2+1);
         switch(Random.Range(0,3)) {
             case (0):
@@ -290,7 +293,7 @@ public class GameManager : MonoBehaviour
                 break;
         }
         m.coins = upgrades*3 + assistants*2 + Random.Range(-assistants, +assistants);
-        m.items = new string[Random.Range(0, upgrades+1)];
+        m.items = new string[diffValue];
         for (int i=0; i<m.items.Length; i++) {
             m.items[i] = ItemsDictionary.GetInstance().GetRandomItemOfRarityUpTo(assistants);
         }
@@ -348,6 +351,14 @@ public class GameManager : MonoBehaviour
     }
 
     public void ChangeMenu(int m) {
+        if (m==5) {
+            if (currentMenu != 5) prevMenu = currentMenu;
+            else {
+                ChangeMenu(prevMenu);
+                return;
+            }
+        }
+        currentMenu = m;
         for (int i=0; i<menus.Length; i++) {
             menus[i].SetActive(i==m);
         }
@@ -395,5 +406,9 @@ public class GameManager : MonoBehaviour
         FindObjectOfType<ShopManager>().AddItemToSellList(name);
         
         return true;
+    }
+
+    public void QuitGame() {
+        Application.Quit();
     }
 }
