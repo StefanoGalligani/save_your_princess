@@ -81,6 +81,7 @@ public class SettingsManager : MonoBehaviour
             else
                 aud.volume =  sfxVolume;
         }
+        GlobalSfxVolume.sfxVolume = sfxVolume;
     }
 
     public void SetMusicVolume() {

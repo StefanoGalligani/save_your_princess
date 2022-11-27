@@ -32,8 +32,20 @@ public class Projectile : MonoBehaviour
         if (coll.GetComponent<LivingCreature>() != null) {
             if (!coll.gameObject.Equals(owner)) {
                 coll.gameObject.GetComponent<LivingCreature>().Damage(damage);
-                Destroy(gameObject);
+                StartCoroutine(PlayAndDestroy());
             }
         }
+    }
+
+    private IEnumerator PlayAndDestroy() {
+        GetComponent<AudioSource>().volume = GlobalSfxVolume.sfxVolume;        
+        GetComponent<AudioSource>().Play();
+
+        GetComponent<Collider>().enabled = false;
+        GetComponent<SpriteRenderer>().enabled = false;
+
+        yield return new WaitForSeconds(0.5f);
+        
+        Destroy(gameObject);
     }
 }
