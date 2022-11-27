@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  distanceToAttack: 2
+  distanceToAttack: 3.5
   health: 8
   attackTime: 0.8
   firstAttackTime: 0.2
