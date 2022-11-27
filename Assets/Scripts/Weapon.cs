@@ -33,7 +33,7 @@ public class Weapon : MonoBehaviour
 
     public void ShootProjectile() {
         GameObject p = Instantiate(projectile);
-        p.transform.position = transform.position + owner.transform.forward*0.2f;
+        p.transform.position = transform.position + owner.transform.forward*0.5f;
         p.GetComponent<Projectile>().SetOwner(owner);
         p.GetComponent<Projectile>().Shoot(owner.transform.forward);
     }
