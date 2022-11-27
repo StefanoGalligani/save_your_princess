@@ -211,6 +211,7 @@ public class GameManager : MonoBehaviour
                 tile.GetComponent<MissionTile>().SetInfo(m);
                 i++;
             }
+            tr.Close();
 
             missionContainer.sizeDelta = new Vector2(0, 350 * i + 50);
         }
