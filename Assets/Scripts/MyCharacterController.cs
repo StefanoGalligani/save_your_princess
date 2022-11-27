@@ -80,7 +80,7 @@ public class MyCharacterController : MonoBehaviour
 
     private bool OnGround() {
         RaycastHit hit;
-        bool g = Physics.SphereCast(transform.position, 0.49f, -transform.up, out hit, .3f, ~LayerMask.NameToLayer("Floor"));
+        bool g = Physics.SphereCast(transform.position, 0.49f, -transform.up, out hit, .4f, ~LayerMask.NameToLayer("Floor"));
         return g;
     }
 

@@ -23,10 +23,11 @@ public class ShopItem : MonoBehaviour
     public void Selected() {
         if (sell) {
             FindObjectOfType<GameManager>().SoldItem(itemName);
-            Destroy(gameObject);
         } else {
             bool bought = FindObjectOfType<GameManager>().BuyItem(itemName);
-            if (bought) Destroy(gameObject);
+            if (!bought) return;
         }
+        FindObjectOfType<ShopManager>().ReduceHeight(sell);
+        Destroy(gameObject);
     }
 }

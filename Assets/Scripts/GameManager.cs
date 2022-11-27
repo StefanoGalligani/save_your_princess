@@ -382,6 +382,8 @@ public class GameManager : MonoBehaviour
 
     public bool BuyItem(string name) {
         if (coins < ItemsDictionary.GetInstance().GetItemPrice(name)) return false;
+        coins -= ItemsDictionary.GetInstance().GetItemPrice(name);
+        UpdateCoins();
         
         TextWriter twInv = new StreamWriter(inventoryPath, true); //write new inventory
         twInv.WriteLine(name);

@@ -54,4 +54,11 @@ public class ShopManager : MonoBehaviour
 
         buyPanel.sizeDelta = new Vector2(buyPanel.sizeDelta.x, 200 + buyPanel.sizeDelta.y);
     }
+
+    public void ReduceHeight(bool sell) {
+        if (sell)
+            sellPanel.sizeDelta = new Vector2(sellPanel.sizeDelta.x, sellPanel.sizeDelta.y - 200);
+        else
+            buyPanel.sizeDelta = new Vector2(buyPanel.sizeDelta.x, buyPanel.sizeDelta.y - 200);
+    }
 }
