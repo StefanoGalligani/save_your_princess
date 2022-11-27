@@ -646,12 +646,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 63919467}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.75, y: -0.203, z: 0.753}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.75, y: -0.45300007, z: 0.753}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 94922580}
+  m_Father: {fileID: 1572314427}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &70738644
@@ -804,7 +804,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1572314427}
-  - {fileID: 63919468}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2579,6 +2578,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2731788008869417633, guid: f2c18e97c11d21143add488854d4de4d, type: 3}
     - target: {fileID: 3843811902627095830, guid: 652ba0e3654e36d4db7c4c96316dd3da, type: 3}
+      propertyPath: minDiff
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3843811902627095830, guid: 652ba0e3654e36d4db7c4c96316dd3da, type: 3}
       propertyPath: isActive
       value: 0
       objectReference: {fileID: 0}
@@ -3680,8 +3683,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 300
-  m_Range: 10000
+  m_Intensity: 70
+  m_Range: 50
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -4528,10 +4531,10 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1000
-  m_Range: 50
-  m_SpotAngle: 115.45406
-  m_InnerSpotAngle: 67.145065
+  m_Intensity: 200
+  m_Range: 100
+  m_SpotAngle: 128.77402
+  m_InnerSpotAngle: 80.46499
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -4643,8 +4646,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 100
-  m_Range: 10000
+  m_Intensity: 50
+  m_Range: 50
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -6513,6 +6516,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 974570262}
+  - {fileID: 63919468}
   m_Father: {fileID: 94922580}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

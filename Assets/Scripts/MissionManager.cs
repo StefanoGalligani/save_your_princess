@@ -71,7 +71,7 @@ public class MissionManager : MonoBehaviour
                         break;
                     case "Weapon":
                         GameObject w = weaponPrefabs[System.Array.IndexOf(weaponNames, splits[1])];
-                        GameObject wInstance = Instantiate(w, player.transform.GetChild(1));
+                        GameObject wInstance = Instantiate(w, player.transform.GetChild(0).GetChild(1));
                         wInstance.GetComponent<Weapon>().damage = stat;
                         player.GetComponent<CombatController>().SetWeapon(wInstance.GetComponent<Weapon>());
                         break;
