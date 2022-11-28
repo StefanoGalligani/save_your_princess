@@ -24,9 +24,9 @@ public class ItemsDictionary
         AddItem("Chestplate_Leather", 8, 3);
         AddItem("Chestplate_Iron", 12, 5, 2);
         AddItem("Chestplate_Ancestral", 30, 10, 6);
-        AddItem("Boots_Leather", 7, 8);
-        AddItem("Boots_Iron", 15, 11, 3);
-        AddItem("Boots_Ancestral", 50, 14, 8);
+        AddItem("Boots_Leather", 7, 6);
+        AddItem("Boots_Iron", 15, 9, 3);
+        AddItem("Boots_Ancestral", 50, 13, 8);
         AddItem("Boots_HighJump", 40, 8, 5);
         AddItem("Weapon_AirSword", 30, 2, 7);
         AddItem("Weapon_VampireSword", 30, 3, 7);

@@ -134,7 +134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   distanceToAttack: 2.5
-  health: 30
+  health: 100
   attackTime: 1
   firstAttackTime: 0.2
   thresholdDistances: {x: 15, y: 30}
