@@ -270,7 +270,7 @@ public class GameManager : MonoBehaviour
         string[] princesses = {"Emily", "Jessamine", "Anastasia", "Constantine", "Beatrice", "Amanda", "Aleksandra",
             "Gloria", "Sara", "Angie", "Maggie", "Adelaida", "Aglaja", "Elanor", "Tangerine", "Mary", "Janet", "Carol",
             "Beatrice", "Suzie", "Barbara", "Judy", "Jane", "Virginia", "Amy", "Valerie", "Diana", "Donna", "Aqua",
-            "Iggy", "Franziska", "Rose", "Emily", "Layla", "Anastasija", "Juliet"};
+            "Iggy", "Franziska", "Rose", "Layla", "Anastasija", "Juliet"};
         m.princess = princesses[Random.Range(0, princesses.Length)];
         int diffValue = Random.Range(1, upgrades+1);
         m.diff = Mathf.Min(4, diffValue);
