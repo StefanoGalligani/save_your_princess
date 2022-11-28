@@ -225,7 +225,9 @@ public class GameManager : MonoBehaviour
             File.Create(listPath).Close();
 
             TextWriter tw = new StreamWriter(listPath);
-            string line = "Name:Jasmine;Diff:1;Days:5;Map:Forest;Time:Noon;Coins:100;Items:Boots_Leather,Sword;Story:prova";
+            string line = "Name:Jasmine;Diff:1;Days:1;Map:Forest;Time:Dusk;Coins:10;Items:Weapon_Spear;" + 
+                "Story:Your first client has desperately come to ask for your help, " +
+                "since princess Jasmine has been kidnapped and is now waiting for you to save her from the forest goblins";
             tw.WriteLine(line);
             tw.Close();
         }
@@ -265,7 +267,10 @@ public class GameManager : MonoBehaviour
 
     private string GenerateMission() {
         MissionInfo m = new MissionInfo();
-        string[] princesses = {"Emily", "Jessamine", "Anastasia", "Constantine", "Beatrice"};
+        string[] princesses = {"Emily", "Jessamine", "Anastasia", "Constantine", "Beatrice", "Amanda", "Aleksandra",
+            "Gloria", "Sara", "Angie", "Maggie", "Adelaida", "Aglaja", "Elanor", "Tangerine", "Mary", "Janet", "Carol",
+            "Beatrice", "Suzie", "Barbara", "Judy", "Jane", "Virginia", "Amy", "Valerie", "Diana", "Donna", "Aqua",
+            "Iggy", "Franziska", "Rose", "Emily", "Layla", "Anastasija", "Juliet"};
         m.princess = princesses[Random.Range(0, princesses.Length)];
         int diffValue = Random.Range(1, upgrades+1);
         m.diff = Mathf.Min(4, diffValue);

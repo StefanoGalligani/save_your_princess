@@ -8922,7 +8922,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &822109271
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11176,7 +11176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9811321, g: 0.9789205, b: 0.7719473, a: 0.89411765}
+  m_Color: {r: 0.9811321, g: 0.9789205, b: 0.7719473, a: 0.79607844}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -13445,8 +13445,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -40.351}
-  m_SizeDelta: {x: 1000, y: 1000}
+  m_AnchoredPosition: {x: 0, y: 5}
+  m_SizeDelta: {x: 1070, y: 1070.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1319419142
 MonoBehaviour:
@@ -13468,7 +13468,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 723afb76e40dc114db3b5bc813a14abc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -19651,63 +19651,63 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 25483463, guid: baa8428421577b448bbad15351cc91cb, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 25483463, guid: baa8428421577b448bbad15351cc91cb, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 214943091, guid: baa8428421577b448bbad15351cc91cb, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 214943091, guid: baa8428421577b448bbad15351cc91cb, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 214943091, guid: baa8428421577b448bbad15351cc91cb, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 318558556, guid: baa8428421577b448bbad15351cc91cb, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.21428572
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 318558556, guid: baa8428421577b448bbad15351cc91cb, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 427368919, guid: baa8428421577b448bbad15351cc91cb, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.21428572
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 427368919, guid: baa8428421577b448bbad15351cc91cb, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 427368919, guid: baa8428421577b448bbad15351cc91cb, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.21428572
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1408635258, guid: baa8428421577b448bbad15351cc91cb, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1408635258, guid: baa8428421577b448bbad15351cc91cb, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1408635258, guid: baa8428421577b448bbad15351cc91cb, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1642482812, guid: baa8428421577b448bbad15351cc91cb, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1642482812, guid: baa8428421577b448bbad15351cc91cb, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1703316067, guid: baa8428421577b448bbad15351cc91cb, type: 3}
       propertyPath: m_Value
