@@ -28,7 +28,7 @@ public class ShopManager : MonoBehaviour
 
         sellPanel.sizeDelta = new Vector2(sellPanel.sizeDelta.x, 200*inventory.Count);
 
-        string[] items = new string[Random.Range(1, FindObjectOfType<GameManager>().upgrades+1)];
+        string[] items = new string[FindObjectOfType<GameManager>().upgrades+1];
         for (int i=0; i<items.Length; i++) {
             items[i] = ItemsDictionary.GetInstance().GetRandomItemOfRarityUpTo(FindObjectOfType<GameManager>().assistants);
         }
