@@ -137,7 +137,7 @@ MonoBehaviour:
   health: 20
   attackTime: 1.2
   firstAttackTime: 0.2
-  thresholdDistances: {x: 20, y: 35}
+  thresholdDistances: {x: 15, y: 30}
 --- !u!65 &3841766885468028509
 BoxCollider:
   m_ObjectHideFlags: 0

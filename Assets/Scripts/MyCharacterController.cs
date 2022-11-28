@@ -38,7 +38,8 @@ public class MyCharacterController : MonoBehaviour
     }
 
     private void HandleInput() {
-        Vector3 movement = CalcMovementDir() * CalcSpeedMultiplier() * speed;
+        Vector3 movDir = CalcMovementDir();
+        Vector3 movement = movDir * CalcSpeedMultiplier(movDir) * speed;
         rb.velocity = new Vector3(movement.x, rb.velocity.y, movement.z);
         if (Input.GetKeyDown(KeyCode.Space) && onGround) {
             rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
@@ -50,7 +51,7 @@ public class MyCharacterController : MonoBehaviour
             + Quaternion.Euler(0,90,0) * horizForward * HorMovement()).normalized;
     }
 
-    private float CalcSpeedMultiplier() {
+    private float CalcSpeedMultiplier(Vector3 dir) {
         if (!onGround) return 1;
         float e = 0.1f;
         RaycastHit hit;
@@ -58,7 +59,7 @@ public class MyCharacterController : MonoBehaviour
 
         Physics.Raycast(transform.position, -transform.up, out hit, 10f, m);
         h1 = hit.distance;
-        Physics.Raycast(transform.position + horizForward * e, -transform.up, out hit, 10f, m);
+        Physics.Raycast(transform.position + dir * e, -transform.up, out hit, 10f, m);
         h2 = hit.distance;
         float d = (h1-h2)/e;
         if (d<0) return 1;

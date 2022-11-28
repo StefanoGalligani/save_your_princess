@@ -42,10 +42,13 @@ public class Weapon : MonoBehaviour
         if (isAttacking && coll.GetComponent<LivingCreature>() != null) {
             if (!coll.gameObject.Equals(owner)) {
                 coll.gameObject.GetComponent<LivingCreature>().Damage(damage);
+                GetComponent<Collider>().enabled = false;
+
                 if (GetComponent<AudioSource>()) {
                     GetComponent<AudioSource>().volume = GlobalSfxVolume.sfxVolume;  
                     GetComponent<AudioSource>().Play();
                 }
+                
                 if (vampire)
                     owner.GetComponent<LivingCreature>().Heal(damage/3);
             }

@@ -132,12 +132,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9281c60220d2f5e43b70a63636867fb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 6
+  speed: 5
   distanceToAttack: 2.5
   health: 15
   attackTime: 1
   firstAttackTime: 0.3
-  thresholdDistances: {x: 20, y: 50}
+  thresholdDistances: {x: 17, y: 30}
 --- !u!65 &3841766885468028509
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -70,7 +70,7 @@ public class CombatController : MonoBehaviour, LivingCreature
     {
         if (dead) return;
 
-        d -= d/37 * FindObjectOfType<MissionManager>().def;
+        d -= d/30 * FindObjectOfType<MissionManager>().def;
         health -= d;
 
         if (holdingPrincess) {
@@ -82,7 +82,7 @@ public class CombatController : MonoBehaviour, LivingCreature
             FindObjectOfType<MissionManager>().Death();
         }
         
-        healthBar.transform.localScale = new Vector3(health/maxHealth, 1, 1);
+        healthBar.transform.localScale = new Vector3(Mathf.Max(0, health/maxHealth), 1, 1);
         GetComponent<AudioSource>().PlayOneShot(hitSound);
     }
 

@@ -14,6 +14,7 @@ public class EntitySpawner : Spawner
     public Vector2Int quantityRange;
     public Vector2 spawnSize;
     public bool randomizeRotation;
+    public bool tower = false;
 
     public override void Spawn(int diff) {
         if (diff >= minDiff) {
@@ -30,7 +31,7 @@ public class EntitySpawner : Spawner
                 Vector3 pos = transform.position + posOffset;
                 
                 RaycastHit hit;
-                Physics.Raycast(pos + Vector3.up * 10, Vector3.down, out hit, 100, ~LayerMask.NameToLayer("Floor"));
+                Physics.Raycast(pos + Vector3.up * (tower ? 5 : 10), Vector3.down, out hit, 100, ~LayerMask.NameToLayer("Floor"));
                 pos = hit.point;
 
                 GameObject instance = Instantiate(entity, pos, transform.rotation, transform);

@@ -133,11 +133,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2.3
-  distanceToAttack: 20
+  distanceToAttack: 15
   health: 7
   attackTime: 1.5
   firstAttackTime: 0.8
-  thresholdDistances: {x: 25, y: 40}
+  thresholdDistances: {x: 15, y: 20}
 --- !u!65 &3841766885468028509
 BoxCollider:
   m_ObjectHideFlags: 0

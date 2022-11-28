@@ -122,19 +122,6 @@ public class GameManager : MonoBehaviour
     }
 
     private void InitInventory() {
-        if (!File.Exists(coinsPath)) {
-            File.Create(coinsPath).Close();
-
-            TextWriter tw = new StreamWriter(coinsPath);
-            tw.WriteLine("10");
-            coins = 10;
-            tw.Close();
-        } else {
-            TextReader tr = new StreamReader(coinsPath);
-            coins = int.Parse(tr.ReadLine());
-            tr.Close();
-        }
-        coinsText.text=""+coins;
 
         if (!File.Exists(inventoryPath)) {
             File.Create(inventoryPath).Close();
@@ -220,6 +207,19 @@ public class GameManager : MonoBehaviour
     }
 
     private void WriteNewMissions() {
+        if (!File.Exists(coinsPath)) {
+            File.Create(coinsPath).Close();
+
+            TextWriter tw = new StreamWriter(coinsPath);
+            tw.WriteLine("10");
+            coins = 10;
+            tw.Close();
+        } else {
+            TextReader tr = new StreamReader(coinsPath);
+            coins = int.Parse(tr.ReadLine());
+            tr.Close();
+        }
+        coinsText.text=""+coins;
         if (!File.Exists(listPath))
         {
             File.Create(listPath).Close();
@@ -297,7 +297,7 @@ public class GameManager : MonoBehaviour
                 m.time = "Night";
                 break;
         }
-        m.coins = upgrades*3 + assistants*2 + Random.Range(-assistants, +assistants);
+        m.coins = (diffValue-1)*5 + upgrades*3 + assistants*2 + Random.Range(-assistants, +assistants);
         m.items = new string[diffValue];
         for (int i=0; i<m.items.Length; i++) {
             m.items[i] = ItemsDictionary.GetInstance().GetRandomItemOfRarityUpTo(assistants);
@@ -308,9 +308,9 @@ public class GameManager : MonoBehaviour
 
     private string GenerateStory(string name) {
         string story = "";
-        string[] activities = {"just minding her business", "having a swim", "studying game developement", "reading a book about social psychology", "explaining her butler why the earth is flat"};
+        string[] activities = {"just minding her business", "having a swim", "studying game developement", "reading a book about social psychology", "explaining her butler why the earth is flat", "arguing with the mirror", "contacting an evil dimension", "writing an absurdist short story about a guy who turns into a caterpillar", "jammin' with her friends"};
         string activity = activities[Random.Range(0, activities.Length)];
-        string[] beginning = {"While princess " + name + " was " + activity + ", ", "Princess " + name + " was " + activity + " when "};
+        string[] beginning = {"While princess " + name + " was " + activity + ", ", "Princess " + name + " was " + activity + ", when "};
         string[] kidnappers = {"a goblin gang", "an evil lord", "some guy who was passing by", "a not so friedly ogre", "an actual ghost", "unexpected consequences", "her dreams", "nobody in particular", "the decadence of society", "the wrong path", "her friend who was secretly a kidnapper", "five invisible dwarves", "a possessed pony", "a british rock band of the 70s"};
         story = beginning[Random.Range(0, beginning.Length)] + kidnappers[Random.Range(0, kidnappers.Length)] + " took her away from her castle";
         return story;
