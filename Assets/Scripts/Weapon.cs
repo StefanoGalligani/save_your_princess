@@ -7,6 +7,7 @@ public class Weapon : MonoBehaviour
     public float damage = 2;
     public GameObject projectile;
     public bool vampire = false;
+    public bool air = false;
     private bool isAttacking = false;
     private Animator anim;
     private GameObject owner;
@@ -42,7 +43,7 @@ public class Weapon : MonoBehaviour
         if (isAttacking && coll.GetComponent<LivingCreature>() != null) {
             if (!coll.gameObject.Equals(owner)) {
                 coll.gameObject.GetComponent<LivingCreature>().Damage(damage);
-                GetComponent<Collider>().enabled = false;
+                if (!air) GetComponent<Collider>().enabled = false;
 
                 if (GetComponent<AudioSource>()) {
                     GetComponent<AudioSource>().volume = GlobalSfxVolume.sfxVolume;  

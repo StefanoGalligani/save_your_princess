@@ -169,6 +169,7 @@ MonoBehaviour:
   damage: 2
   projectile: {fileID: 0}
   vampire: 0
+  air: 1
 --- !u!54 &2577591600057480428
 Rigidbody:
   m_ObjectHideFlags: 0
